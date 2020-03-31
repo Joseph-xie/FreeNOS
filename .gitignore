@@ -15,3 +15,6 @@ config.log
 *.orig
 *.tar.gz
 ChangeLog-*
+
+.idea/
+cmake-build-debug/

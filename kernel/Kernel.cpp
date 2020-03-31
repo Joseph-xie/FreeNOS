@@ -82,6 +82,9 @@ Error Kernel::heap(Address base, Size size)
     // Clear the heap first
     MemoryBlock::set((void *) base, 0, size);
 
+    //todo 这里的new操作在Allocator.h文件里面重载了，重写的结果是从Allocator的default
+    //里面获取申请器，但是这个申请器默认还没有设置，设置的代码是在下面的Allocator::setDefault(pool);
+    //这里进行设置，如何在这里进行动态申请内存的？？？
     // Setup the dynamic memory heap
     bubble = new (base) BubbleAllocator(base + meta, size - meta);
     pool   = new (base + sizeof(BubbleAllocator)) PoolAllocator();

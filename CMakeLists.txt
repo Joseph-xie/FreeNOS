@@ -1,0 +1,684 @@
+cmake_minimum_required(VERSION 3.15)
+project(FreeNOS)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(bin/bench)
+include_directories(bin/cat)
+include_directories(bin/echo)
+include_directories(bin/hostname)
+include_directories(bin/img)
+include_directories(bin/init)
+include_directories(bin/ipctest)
+include_directories(bin/login)
+include_directories(bin/ls)
+include_directories(bin/mknod)
+include_directories(bin/mount)
+include_directories(bin/netcat)
+include_directories(bin/netctl)
+include_directories(bin/netping)
+include_directories(bin/netrecv)
+include_directories(bin/netsend)
+include_directories(bin/prime)
+include_directories(bin/ps)
+include_directories(bin/rm)
+include_directories(bin/sh)
+include_directories(bin/sleep)
+include_directories(bin/stat)
+include_directories(bin/sysinfo)
+include_directories(bin/touch)
+include_directories(bin/uname)
+include_directories(config)
+include_directories(config/arm)
+include_directories(config/arm/raspberry)
+include_directories(config/arm/raspberry2)
+include_directories(config/intel)
+include_directories(config/intel/pc)
+include_directories(kernel)
+include_directories(kernel/API)
+include_directories(kernel/arm)
+include_directories(kernel/arm/raspberry)
+include_directories(kernel/arm/raspberry2)
+include_directories(kernel/intel)
+include_directories(lib/liballoc)
+include_directories(lib/libarch)
+include_directories(lib/libarch/arm)
+include_directories(lib/libarch/arm/broadcom)
+include_directories(lib/libarch/intel)
+include_directories(lib/libexec)
+include_directories(lib/libfs)
+include_directories(lib/libi2c)
+include_directories(lib/libipc)
+include_directories(lib/libmpi)
+include_directories(lib/libnet)
+include_directories(lib/libposix)
+include_directories(lib/libposix/sys)
+include_directories(lib/libspi)
+include_directories(lib/libstd)
+include_directories(lib/libteken)
+include_directories(lib/libtest)
+include_directories(lib/libusb)
+include_directories(server/ata)
+include_directories(server/core)
+include_directories(server/filesystem/linn)
+include_directories(server/filesystem/sys)
+include_directories(server/filesystem/tmp)
+include_directories(server/i2c/grovepi)
+include_directories(server/ipctest)
+include_directories(server/network/loopback)
+include_directories(server/network/smsc95xx)
+include_directories(server/nfc/pn532)
+include_directories(server/ps2)
+include_directories(server/serial)
+include_directories(server/terminal)
+include_directories(server/time)
+include_directories(server/usb/controller)
+include_directories(server/video)
+include_directories(support)
+include_directories(support/doxygen)
+
+add_executable(FreeNOS
+        bin/bench/BenchMark.cpp
+        bin/bench/BenchMark.h
+        bin/bench/Main.cpp
+        bin/cat/Cat.cpp
+        bin/cat/Cat.h
+        bin/cat/Main.cpp
+        bin/echo/Echo.cpp
+        bin/echo/Echo.h
+        bin/echo/Main.cpp
+        bin/hostname/Hostname.cpp
+        bin/hostname/Hostname.h
+        bin/hostname/Main.cpp
+        bin/img/BootImageCreate.cpp
+        bin/img/BootImageCreate.h
+        bin/img/Main.cpp
+        bin/init/Init.cpp
+        bin/init/Init.h
+        bin/init/Main.cpp
+        bin/ipctest/IPCTest.cpp
+        bin/ipctest/IPCTest.h
+        bin/ipctest/Main.cpp
+        bin/login/Login.cpp
+        bin/login/Login.h
+        bin/login/Main.cpp
+        bin/ls/ListFiles.cpp
+        bin/ls/ListFiles.h
+        bin/ls/Main.cpp
+        bin/mknod/Main.cpp
+        bin/mknod/MakeNode.cpp
+        bin/mknod/MakeNode.h
+        bin/mount/Main.cpp
+        bin/mount/Mount.cpp
+        bin/mount/Mount.h
+        bin/mpiping/Main.cpp
+        bin/mpiprime/Main.cpp
+        bin/netcat/Main.cpp
+        bin/netcat/NetCat.cpp
+        bin/netcat/NetCat.h
+        bin/netctl/Main.cpp
+        bin/netctl/NetCtl.cpp
+        bin/netctl/NetCtl.h
+        bin/netping/Main.cpp
+        bin/netping/NetPing.cpp
+        bin/netping/NetPing.h
+        bin/netrecv/Main.cpp
+        bin/netrecv/NetReceive.cpp
+        bin/netrecv/NetReceive.h
+        bin/netsend/Main.cpp
+        bin/netsend/NetSend.cpp
+        bin/netsend/NetSend.h
+        bin/prime/Main.cpp
+        bin/prime/SievePrime.cpp
+        bin/prime/SievePrime.h
+        bin/ps/Main.cpp
+        bin/ps/ProcessList.cpp
+        bin/ps/ProcessList.h
+        bin/reboot/Main.cpp
+        bin/rm/Main.cpp
+        bin/rm/Remove.cpp
+        bin/rm/Remove.h
+        bin/sh/ChangeDirCommand.cpp
+        bin/sh/ChangeDirCommand.h
+        bin/sh/ExitCommand.cpp
+        bin/sh/ExitCommand.h
+        bin/sh/HelpCommand.cpp
+        bin/sh/HelpCommand.h
+        bin/sh/Main.cpp
+        bin/sh/Shell.cpp
+        bin/sh/Shell.h
+        bin/sh/ShellCommand.cpp
+        bin/sh/ShellCommand.h
+        bin/sh/StdioCommand.cpp
+        bin/sh/StdioCommand.h
+        bin/sh/TimeCommand.cpp
+        bin/sh/TimeCommand.h
+        bin/sh/WriteCommand.cpp
+        bin/sh/WriteCommand.h
+        bin/shutdown/Main.cpp
+        bin/sleep/Main.cpp
+        bin/sleep/Sleep.cpp
+        bin/sleep/Sleep.h
+        bin/stat/FileStatus.cpp
+        bin/stat/FileStatus.h
+        bin/stat/Main.cpp
+        bin/sysinfo/Main.cpp
+        bin/sysinfo/SysInfo.cpp
+        bin/sysinfo/SysInfo.h
+        bin/touch/CreateFile.cpp
+        bin/touch/CreateFile.h
+        bin/touch/Main.cpp
+        bin/uname/Main.cpp
+        bin/uname/UnixName.cpp
+        bin/uname/UnixName.h
+#        config/arm/raspberry/System.h
+#        config/arm/raspberry2/System.h
+        config/intel/pc/System.h
+        kernel/API/IOCtl.cpp
+        kernel/API/IOCtl.h
+        kernel/API/PrivExec.cpp
+        kernel/API/PrivExec.h
+        kernel/API/ProcessCtl.cpp
+        kernel/API/ProcessCtl.h
+        kernel/API/ProcessID.h
+        kernel/API/SystemInfo.cpp
+        kernel/API/SystemInfo.h
+        kernel/API/VMCopy.cpp
+        kernel/API/VMCopy.h
+        kernel/API/VMCtl.cpp
+        kernel/API/VMCtl.h
+        kernel/API/VMShare.cpp
+        kernel/API/VMShare.h
+        kernel/arm/raspberry/Main.cpp
+        kernel/arm/raspberry/RaspiSerial.cpp
+        kernel/arm/raspberry/RaspiSerial.h
+        kernel/arm/ARMKernel.cpp
+        kernel/arm/ARMKernel.h
+        kernel/arm/ARMProcess.cpp
+        kernel/arm/ARMProcess.h
+        kernel/intel/pc/Main.cpp
+        kernel/intel/IntelKernel.cpp
+        kernel/intel/IntelKernel.h
+        kernel/intel/IntelProcess.cpp
+        kernel/intel/IntelProcess.h
+        kernel/intel/IntelSerial.cpp
+        kernel/intel/IntelSerial.h
+        kernel/API.cpp
+        kernel/API.h
+        kernel/Kernel.cpp
+        kernel/Kernel.h
+        kernel/Process.cpp
+        kernel/Process.h
+        kernel/ProcessEvent.h
+        kernel/ProcessManager.cpp
+        kernel/ProcessManager.h
+        kernel/ProcessShares.cpp
+        kernel/ProcessShares.h
+        kernel/Scheduler.cpp
+        kernel/Scheduler.h
+        kernel/Support.cpp
+        kernel/Support.h
+        lib/liballoc/Allocator.cpp
+        lib/liballoc/Allocator.h
+        lib/liballoc/BitAllocator.cpp
+        lib/liballoc/BitAllocator.h
+        lib/liballoc/BubbleAllocator.cpp
+        lib/liballoc/BubbleAllocator.h
+        lib/liballoc/PageAllocator.cpp
+        lib/liballoc/PageAllocator.h
+        lib/liballoc/PoolAllocator.cpp
+        lib/liballoc/PoolAllocator.h
+        lib/liballoc/SplitAllocator.cpp
+        lib/liballoc/SplitAllocator.h
+        lib/libarch/arm/broadcom/Broadcom2836.cpp
+        lib/libarch/arm/broadcom/Broadcom2836.h
+        lib/libarch/arm/broadcom/BroadcomGPIO.cpp
+        lib/libarch/arm/broadcom/BroadcomGPIO.h
+        lib/libarch/arm/broadcom/BroadcomInterrupt.cpp
+        lib/libarch/arm/broadcom/BroadcomInterrupt.h
+        lib/libarch/arm/broadcom/BroadcomMailbox.cpp
+        lib/libarch/arm/broadcom/BroadcomMailbox.h
+        lib/libarch/arm/broadcom/BroadcomPower.cpp
+        lib/libarch/arm/broadcom/BroadcomPower.h
+        lib/libarch/arm/broadcom/BroadcomTimer.cpp
+        lib/libarch/arm/broadcom/BroadcomTimer.h
+        lib/libarch/arm/ARMCacheV6.cpp
+        lib/libarch/arm/ARMCacheV6.h
+        lib/libarch/arm/ARMCacheV7.cpp
+        lib/libarch/arm/ARMCacheV7.h
+        lib/libarch/arm/ARMConstant.h
+        lib/libarch/arm/ARMControl.cpp
+        lib/libarch/arm/ARMControl.h
+        lib/libarch/arm/ARMCore.cpp
+        lib/libarch/arm/ARMCore.h
+        lib/libarch/arm/ARMFirstTable.cpp
+        lib/libarch/arm/ARMFirstTable.h
+        lib/libarch/arm/ARMInterrupt.cpp
+        lib/libarch/arm/ARMInterrupt.h
+        lib/libarch/arm/ARMIO.cpp
+        lib/libarch/arm/ARMIO.h
+        lib/libarch/arm/ARMMap.cpp
+        lib/libarch/arm/ARMMap.h
+        lib/libarch/arm/ARMPaging.cpp
+        lib/libarch/arm/ARMPaging.h
+        lib/libarch/arm/ARMSecondTable.cpp
+        lib/libarch/arm/ARMSecondTable.h
+        lib/libarch/arm/ARMTimer.cpp
+        lib/libarch/arm/ARMTimer.h
+        lib/libarch/intel/IntelACPI.cpp
+        lib/libarch/intel/IntelACPI.h
+        lib/libarch/intel/IntelAPIC.cpp
+        lib/libarch/intel/IntelAPIC.h
+        lib/libarch/intel/IntelBoot.cpp
+        lib/libarch/intel/IntelBoot.h
+        lib/libarch/intel/IntelCache.cpp
+        lib/libarch/intel/IntelCache.h
+        lib/libarch/intel/IntelConstant.h
+        lib/libarch/intel/IntelCore.cpp
+        lib/libarch/intel/IntelCore.h
+        lib/libarch/intel/IntelIO.h
+        lib/libarch/intel/IntelMap.cpp
+        lib/libarch/intel/IntelMap.h
+        lib/libarch/intel/IntelMP.cpp
+        lib/libarch/intel/IntelMP.h
+        lib/libarch/intel/IntelPageDirectory.cpp
+        lib/libarch/intel/IntelPageDirectory.h
+        lib/libarch/intel/IntelPageTable.cpp
+        lib/libarch/intel/IntelPageTable.h
+        lib/libarch/intel/IntelPaging.cpp
+        lib/libarch/intel/IntelPaging.h
+        lib/libarch/intel/IntelPIC.cpp
+        lib/libarch/intel/IntelPIC.h
+        lib/libarch/intel/IntelPIT.cpp
+        lib/libarch/intel/IntelPIT.h
+        lib/libarch/intel/IntelState.h
+        lib/libarch/BootImage.h
+        lib/libarch/Cache.cpp
+        lib/libarch/Cache.h
+        lib/libarch/Core.cpp
+        lib/libarch/Core.h
+        lib/libarch/CoreInfo.cpp
+        lib/libarch/CoreInfo.h
+        lib/libarch/CoreManager.cpp
+        lib/libarch/CoreManager.h
+        lib/libarch/IntController.cpp
+        lib/libarch/IntController.h
+        lib/libarch/IO.cpp
+        lib/libarch/IO.h
+        lib/libarch/KernelLog.cpp
+        lib/libarch/KernelLog.h
+        lib/libarch/Memory.h
+        lib/libarch/MemoryContext.cpp
+        lib/libarch/MemoryContext.h
+        lib/libarch/MemoryMap.cpp
+        lib/libarch/MemoryMap.h
+        lib/libarch/Timer.cpp
+        lib/libarch/Timer.h
+        lib/libexec/ELF.cpp
+        lib/libexec/ELF.h
+        lib/libexec/ELFHeader.h
+        lib/libexec/ExecutableFormat.cpp
+        lib/libexec/ExecutableFormat.h
+        lib/libfs/BootImageStorage.cpp
+        lib/libfs/BootImageStorage.h
+        lib/libfs/Device.cpp
+        lib/libfs/Device.h
+        lib/libfs/DeviceServer.cpp
+        lib/libfs/DeviceServer.h
+        lib/libfs/Directory.cpp
+        lib/libfs/Directory.h
+        lib/libfs/File.cpp
+        lib/libfs/File.h
+        lib/libfs/FileCache.h
+        lib/libfs/FileMode.h
+        lib/libfs/FileStat.h
+        lib/libfs/FileStorage.cpp
+        lib/libfs/FileStorage.h
+        lib/libfs/FileSystem.cpp
+        lib/libfs/FileSystem.h
+        lib/libfs/FileSystemMessage.h
+        lib/libfs/FileSystemPath.cpp
+        lib/libfs/FileSystemPath.h
+        lib/libfs/FileSystemRequest.cpp
+        lib/libfs/FileSystemRequest.h
+        lib/libfs/FileType.h
+        lib/libfs/IOBuffer.cpp
+        lib/libfs/IOBuffer.h
+        lib/libfs/PseudoFile.cpp
+        lib/libfs/PseudoFile.h
+        lib/libfs/Storage.cpp
+        lib/libfs/Storage.h
+        lib/libi2c/BroadcomI2C.cpp
+        lib/libi2c/BroadcomI2C.h
+        lib/libi2c/I2C.cpp
+        lib/libi2c/I2C.h
+        lib/libipc/Channel.cpp
+        lib/libipc/Channel.h
+        lib/libipc/ChannelClient.cpp
+        lib/libipc/ChannelClient.h
+        lib/libipc/ChannelMessage.h
+        lib/libipc/ChannelRegistry.cpp
+        lib/libipc/ChannelRegistry.h
+        lib/libipc/ChannelServer.h
+        lib/libipc/EventNotifier.h
+        lib/libipc/IntNotifier.h
+        lib/libipc/MemoryChannel.cpp
+        lib/libipc/MemoryChannel.h
+        lib/libmpi/MPI.cpp
+        lib/libmpi/mpi.h
+        lib/libmpi/MPI_Comm.cpp
+        lib/libmpi/MPI_Recv.cpp
+        lib/libmpi/MPI_Send.cpp
+        lib/libmpi/MPIMessage.h
+        lib/libnet/ARP.cpp
+        lib/libnet/ARP.h
+        lib/libnet/ARPSocket.cpp
+        lib/libnet/ARPSocket.h
+        lib/libnet/Ethernet.cpp
+        lib/libnet/Ethernet.h
+        lib/libnet/EthernetAddress.cpp
+        lib/libnet/EthernetAddress.h
+        lib/libnet/ICMP.cpp
+        lib/libnet/ICMP.h
+        lib/libnet/ICMPFactory.cpp
+        lib/libnet/ICMPFactory.h
+        lib/libnet/ICMPSocket.cpp
+        lib/libnet/ICMPSocket.h
+        lib/libnet/IPV4.cpp
+        lib/libnet/IPV4.h
+        lib/libnet/IPV4Address.cpp
+        lib/libnet/IPV4Address.h
+        lib/libnet/NetworkClient.cpp
+        lib/libnet/NetworkClient.h
+        lib/libnet/NetworkDevice.cpp
+        lib/libnet/NetworkDevice.h
+        lib/libnet/NetworkProtocol.cpp
+        lib/libnet/NetworkProtocol.h
+        lib/libnet/NetworkQueue.cpp
+        lib/libnet/NetworkQueue.h
+        lib/libnet/NetworkServer.cpp
+        lib/libnet/NetworkServer.h
+        lib/libnet/NetworkSocket.cpp
+        lib/libnet/NetworkSocket.h
+        lib/libnet/UDP.cpp
+        lib/libnet/UDP.h
+        lib/libnet/UDPFactory.cpp
+        lib/libnet/UDPFactory.h
+        lib/libnet/UDPSocket.cpp
+        lib/libnet/UDPSocket.h
+        lib/libposix/dirent/closedir.cpp
+        lib/libposix/dirent/opendir.cpp
+        lib/libposix/dirent/readdir.cpp
+        lib/libposix/fcntl/open.cpp
+        lib/libposix/libgen/basename.cpp
+        lib/libposix/libgen/dirname.cpp
+        lib/libposix/math/abs.cpp
+        lib/libposix/math/sqrt.cpp
+        lib/libposix/stdio/fclose.cpp
+        lib/libposix/stdio/fopen.cpp
+        lib/libposix/stdio/fread.cpp
+        lib/libposix/stdio/printf.cpp
+        lib/libposix/stdio/snprintf.cpp
+        lib/libposix/stdio/vprintf.cpp
+        lib/libposix/stdio/vsnprintf.cpp
+        lib/libposix/stdlib/atoi.cpp
+        lib/libposix/stdlib/exit.cpp
+        lib/libposix/stdlib/free.cpp
+        lib/libposix/stdlib/itoa.cpp
+        lib/libposix/stdlib/malloc.cpp
+        lib/libposix/stdlib/random.cpp
+        lib/libposix/stdlib/strtol.cpp
+        lib/libposix/string/memcpy.cpp
+        lib/libposix/string/memset.cpp
+        lib/libposix/string/strcasecmp.cpp
+        lib/libposix/string/strcat.cpp
+        lib/libposix/string/strchr.cpp
+        lib/libposix/string/strcmp.cpp
+        lib/libposix/string/strcpy.cpp
+        lib/libposix/string/strdup.cpp
+        lib/libposix/string/strerror.cpp
+        lib/libposix/string/strlcpy.cpp
+        lib/libposix/string/strlen.cpp
+        lib/libposix/string/strncasecmp.cpp
+        lib/libposix/string/strncat.cpp
+        lib/libposix/string/strncmp.cpp
+        lib/libposix/string/strncpy.cpp
+        lib/libposix/string/strndup.cpp
+        lib/libposix/string/strrchr.cpp
+        lib/libposix/sys/socket/connect.cpp
+        lib/libposix/sys/socket/recvfrom.cpp
+        lib/libposix/sys/socket/sendto.cpp
+        lib/libposix/sys/stat/creat.cpp
+        lib/libposix/sys/stat/mkdir.cpp
+        lib/libposix/sys/stat/mknod.cpp
+        lib/libposix/sys/stat/stat.cpp
+        lib/libposix/sys/time/gettimeofday.cpp
+        lib/libposix/sys/time/printtimediff.cpp
+        lib/libposix/sys/utsname/utsname.cpp
+        lib/libposix/sys/wait/waitpid.cpp
+        lib/libposix/sys/socket.h
+        lib/libposix/sys/stat.h
+        lib/libposix/sys/time.h
+        lib/libposix/sys/types.h
+        lib/libposix/sys/utsname.h
+        lib/libposix/sys/wait.h
+        lib/libposix/time/time.cpp
+        lib/libposix/unistd/chdir.cpp
+        lib/libposix/unistd/close.cpp
+        lib/libposix/unistd/forkexec.cpp
+        lib/libposix/unistd/getcwd.cpp
+        lib/libposix/unistd/gethostname.cpp
+        lib/libposix/unistd/getpid.cpp
+        lib/libposix/unistd/getppid.cpp
+        lib/libposix/unistd/lseek.cpp
+        lib/libposix/unistd/read.cpp
+        lib/libposix/unistd/sleep.cpp
+        lib/libposix/unistd/spawn.cpp
+        lib/libposix/unistd/unlink.cpp
+        lib/libposix/unistd/write.cpp
+        lib/libposix/Assert.cpp
+        lib/libposix/assert.h
+        lib/libposix/ctype.h
+        lib/libposix/dirent.h
+        lib/libposix/errno.c
+        lib/libposix/errno.h
+        lib/libposix/fcntl.h
+        lib/libposix/FileDescriptor.h
+        lib/libposix/FileSystemMount.h
+        lib/libposix/libgen.h
+        lib/libposix/limits.h
+        lib/libposix/math.h
+        lib/libposix/POSIXApplication.cpp
+        lib/libposix/POSIXApplication.h
+        lib/libposix/Runtime.cpp
+        lib/libposix/Runtime.h
+        lib/libposix/stdarg.h
+        lib/libposix/stdio.h
+        lib/libposix/StdioLog.cpp
+        lib/libposix/StdioLog.h
+        lib/libposix/stdlib.h
+        lib/libposix/string.h
+        lib/libposix/time.h
+        lib/libposix/unistd.h
+        lib/libspi/BroadcomSPI.cpp
+        lib/libspi/BroadcomSPI.h
+        lib/libspi/SPI.cpp
+        lib/libspi/SPI.h
+        lib/libstd/Application.cpp
+        lib/libstd/Application.h
+        lib/libstd/Argument.cpp
+        lib/libstd/Argument.h
+        lib/libstd/ArgumentContainer.cpp
+        lib/libstd/ArgumentContainer.h
+        lib/libstd/ArgumentParser.cpp
+        lib/libstd/ArgumentParser.h
+        lib/libstd/Array.h
+        lib/libstd/Assert.h
+        lib/libstd/Associative.h
+        lib/libstd/BitArray.cpp
+        lib/libstd/BitArray.h
+        lib/libstd/BitOperations.h
+        lib/libstd/Callback.h
+        lib/libstd/Character.h
+        lib/libstd/Comparable.h
+        lib/libstd/ConstHashIterator.h
+        lib/libstd/ConstIterator.h
+        lib/libstd/Container.cpp
+        lib/libstd/Container.h
+        lib/libstd/Factory.h
+        lib/libstd/HashFunction.cpp
+        lib/libstd/HashFunction.h
+        lib/libstd/HashIterator.h
+        lib/libstd/HashTable.h
+        lib/libstd/Index.h
+        lib/libstd/Iterator.h
+        lib/libstd/List.h
+        lib/libstd/ListIterator.h
+        lib/libstd/Log.cpp
+        lib/libstd/Log.h
+        lib/libstd/Macros.h
+        lib/libstd/MemoryBlock.cpp
+        lib/libstd/MemoryBlock.h
+        lib/libstd/Sequence.h
+        lib/libstd/Singleton.h
+        lib/libstd/String.cpp
+        lib/libstd/String.h
+        lib/libstd/Types.h
+        lib/libstd/Vector.h
+        lib/libteken/teken.c
+        lib/libteken/teken.h
+        lib/libteken/teken_scs.h
+        lib/libteken/teken_state.h
+        lib/libteken/teken_subr.h
+        lib/libteken/teken_subr_compat.h
+        lib/libteken/teken_wcwidth.h
+        lib/libtest/DirectoryScanner.cpp
+        lib/libtest/DirectoryScanner.h
+        lib/libtest/ExternalTest.cpp
+        lib/libtest/ExternalTest.h
+        lib/libtest/LocalTest.cpp
+        lib/libtest/LocalTest.h
+        lib/libtest/StdoutReporter.cpp
+        lib/libtest/StdoutReporter.h
+        lib/libtest/TAPReporter.cpp
+        lib/libtest/TAPReporter.h
+        lib/libtest/TestCase.h
+        lib/libtest/TestChar.h
+        lib/libtest/TestData.h
+        lib/libtest/TestInstance.cpp
+        lib/libtest/TestInstance.h
+        lib/libtest/TestInt.h
+        lib/libtest/TestMain.h
+        lib/libtest/TestReporter.cpp
+        lib/libtest/TestReporter.h
+        lib/libtest/TestResult.cpp
+        lib/libtest/TestResult.h
+        lib/libtest/TestRunner.cpp
+        lib/libtest/TestRunner.h
+        lib/libtest/TestSuite.cpp
+        lib/libtest/TestSuite.h
+        lib/libusb/USB.h
+        lib/libusb/USBController.cpp
+        lib/libusb/USBController.h
+        lib/libusb/USBDescriptor.h
+        lib/libusb/USBDevice.cpp
+        lib/libusb/USBDevice.h
+        lib/libusb/USBHub.cpp
+        lib/libusb/USBHub.h
+        lib/libusb/USBMessage.h
+        lib/libusb/USBPort.h
+        lib/libusb/USBTransfer.h
+        lib/libusb/USBTransferFile.cpp
+        lib/libusb/USBTransferFile.h
+        server/ata/ATAController.cpp
+        server/ata/ATAController.h
+        server/core/CoreServer.cpp
+        server/core/CoreServer.h
+        server/core/Main.cpp
+        server/filesystem/linn/LinnCreate.cpp
+        server/filesystem/linn/LinnCreate.h
+        server/filesystem/linn/LinnDirectory.cpp
+        server/filesystem/linn/LinnDirectory.h
+        server/filesystem/linn/LinnDirectoryEntry.h
+        server/filesystem/linn/LinnDump.cpp
+        server/filesystem/linn/LinnFile.cpp
+        server/filesystem/linn/LinnFile.h
+        server/filesystem/linn/LinnFileSystem.cpp
+        server/filesystem/linn/LinnFileSystem.h
+        server/filesystem/linn/LinnGroup.h
+        server/filesystem/linn/LinnInode.h
+        server/filesystem/linn/LinnSuperBlock.h
+        server/filesystem/sys/Main.cpp
+        server/filesystem/sys/MountsFile.cpp
+        server/filesystem/sys/MountsFile.h
+        server/filesystem/sys/MountWaitFile.cpp
+        server/filesystem/sys/MountWaitFile.h
+        server/filesystem/sys/SysInfoFileSystem.cpp
+        server/filesystem/sys/SysInfoFileSystem.h
+        server/filesystem/tmp/Main.cpp
+        server/filesystem/tmp/TmpFileSystem.cpp
+        server/filesystem/tmp/TmpFileSystem.h
+        server/i2c/grovepi/AnalogPort.cpp
+        server/i2c/grovepi/AnalogPort.h
+        server/i2c/grovepi/Demo.cpp
+        server/i2c/grovepi/DigitalPort.cpp
+        server/i2c/grovepi/DigitalPort.h
+        server/i2c/grovepi/LCDBar.cpp
+        server/i2c/grovepi/LCDBar.h
+        server/i2c/grovepi/Main.cpp
+        server/idle/Main.cpp
+        server/ipctest/IPCTestMessage.h
+        server/ipctest/IPCTestServer.cpp
+        server/ipctest/IPCTestServer.h
+        server/ipctest/Main.cpp
+        server/network/loopback/Loopback.cpp
+        server/network/loopback/Loopback.h
+        server/network/loopback/Main.cpp
+        server/network/smsc95xx/Main.cpp
+        server/network/smsc95xx/SMSC95xx.cpp
+        server/network/smsc95xx/SMSC95xx.h
+        server/network/smsc95xx/SMSC95xxUSB.cpp
+        server/network/smsc95xx/SMSC95xxUSB.h
+        server/nfc/pn532/Main.cpp
+        server/nfc/pn532/PN532.cpp
+        server/nfc/pn532/PN532.h
+        server/ps2/Keyboard.cpp
+        server/ps2/Keyboard.h
+        server/ps2/Main.cpp
+        server/serial/i8250.cpp
+        server/serial/i8250.h
+        server/serial/Main.cpp
+        server/serial/PL011.cpp
+        server/serial/PL011.h
+        server/terminal/Main.cpp
+        server/terminal/Terminal.cpp
+        server/terminal/Terminal.h
+        server/terminal/TerminalCodes.h
+        server/time/Main.cpp
+        server/time/Time.cpp
+        server/time/Time.h
+        server/usb/controller/Main.cpp
+        server/usb/controller/SynopsisChannel.cpp
+        server/usb/controller/SynopsisChannel.h
+        server/usb/controller/SynopsisController.cpp
+        server/usb/controller/SynopsisController.h
+        server/usb/hub/Main.cpp
+        server/video/Main.cpp
+        server/video/VGA.cpp
+        server/video/VGA.h
+        support/doxygen/Doxygen.h
+        test/lib/liballoc/BubbleAllocatorTest.cpp
+        test/lib/libposix/AbsTest.cpp
+        test/lib/libposix/SqrtTest.cpp
+        test/lib/libstd/ArrayTest.cpp
+        test/lib/libstd/BitArrayTest.cpp
+        test/lib/libstd/HashIteratorTest.cpp
+        test/lib/libstd/HashTableTest.cpp
+        test/lib/libstd/IndexTest.cpp
+        test/lib/libstd/ListIteratorTest.cpp
+        test/lib/libstd/ListTest.cpp
+        test/lib/libstd/MacrosTest.cpp
+        test/lib/libstd/SingletonTest.cpp
+        test/lib/libstd/StringTest.cpp
+        test/lib/libstd/VectorTest.cpp
+        test/Main.cpp)
